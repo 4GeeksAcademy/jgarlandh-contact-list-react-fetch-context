@@ -12,6 +12,7 @@ const Home = () => {
 
     return (
         <div className="text-center mt-5">
+            <h1>HOLA!</h1>
             <h1>Lista de Contactos</h1>
             {store.contacts.map((contact) => (
                 <ContactCard key={contact.id} contact={contact} />
