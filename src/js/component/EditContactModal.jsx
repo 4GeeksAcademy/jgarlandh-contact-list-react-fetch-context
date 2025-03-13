@@ -25,14 +25,13 @@ const EditContactModal = ({ show, onClose, onSave, contact, isNew }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newContact = { name, address, phone, email };
-        onSave(newContact); // Envía los datos del nuevo contacto o los cambios
+        const updatedContact = { ...contact, name, address, phone, email }; // Incluye el ID del contacto si existe
+        onSave(updatedContact); // Envía los datos del contacto actualizado o nuevo
     };
 
     if (!show) return null; // No renderizar si no está visible
 
     return (
-
         <>
         <div
             className="modal fade show"
