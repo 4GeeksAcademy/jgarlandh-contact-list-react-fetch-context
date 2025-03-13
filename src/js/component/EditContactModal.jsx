@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const EditContactModal = ({ show, onClose, onSave, contact, isNew }) => {
     // Estado para los campos del formulario
-    const [name, setName] = useState(isNew ? "" : contact.name);
-    const [address, setAddress] = useState(isNew ? "" : contact.address);
-    const [phone, setPhone] = useState(isNew ? "" : contact.phone);
-    const [email, setEmail] = useState(isNew ? "" : contact.email);
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+
+    // Reiniciar el formulario cuando el modal se abra en modo "creación"
+    useEffect(() => {
+        if (show && isNew) {
+            setName("");
+            setAddress("");
+            setPhone("");
+            setEmail("");
+        } else if (show && !isNew) {
+            // Si es modo "edición", llenar el formulario con los datos del contacto
+            setName(contact.name);
+            setAddress(contact.address);
+            setPhone(contact.phone);
+            setEmail(contact.email);
+        }
+    }, [show, isNew, contact]); // Dependencias: show, isNew y contact
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,8 +32,8 @@ const EditContactModal = ({ show, onClose, onSave, contact, isNew }) => {
     if (!show) return null; // No renderizar si no está visible
 
     return (
-        <>
 
+        <>
         <div
             className="modal fade show"
             id="editContactModal"
