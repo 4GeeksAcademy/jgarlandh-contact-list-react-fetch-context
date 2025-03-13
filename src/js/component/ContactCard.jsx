@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext"; // Importa el contexto
 import EditContactModal from "./EditContactModal.jsx";
 import DeleteConfirmationModal from "./DeleteConfirmationModal.jsx";
 
-const ContactCard = ({ contact, onUpdate, onDelete }) => {
+const ContactCard = ({ contact }) => {
+    const { actions } = useContext(Context); // Accede a las acciones del store
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -15,12 +17,12 @@ const ContactCard = ({ contact, onUpdate, onDelete }) => {
     };
 
     const handleSave = (updatedContact) => {
-        onUpdate(updatedContact); // Llama a la función de actualización (desde flux.js)
+        actions.updateContact(updatedContact); // Llama a la acción de actualización
         setShowEditModal(false); // Cierra el modal
     };
 
     const handleConfirmDelete = () => {
-        onDelete(contact.id); // Llama a la función de eliminación (desde flux.js)
+        actions.deleteContact(contact.id); // Llama a la acción de eliminación
         setShowDeleteModal(false); // Cierra el modal
     };
 
@@ -82,6 +84,7 @@ const ContactCard = ({ contact, onUpdate, onDelete }) => {
                 onClose={() => setShowDeleteModal(false)}
                 onConfirm={handleConfirmDelete}
             />
+
 
             <style>
                 {`
