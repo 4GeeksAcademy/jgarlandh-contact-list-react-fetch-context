@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EditContactModal from "./EditContactModal";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import EditContactModal from "./EditContactModal.jsx";
+import DeleteConfirmationModal from "./DeleteConfirmationModal.jsx";
 
 const ContactCard = ({ contact, onUpdate, onDelete }) => {
     const [showEditModal, setShowEditModal] = useState(false);
